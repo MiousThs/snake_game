@@ -1,0 +1,25 @@
+{
+  "name": "snake_game",
+  "version": "1.0.0",
+  "description": "Basic typescript snake game",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiousThs/snake_game.git"
+  },
+  "author": "mious.ths",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MiousThs/snake_game/issues"
+  },
+  "homepage": "https://github.com/MiousThs/snake_game#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "lite-server": "^2.5.4",
+    "typescript": "^3.8.3"
+  }
+}
