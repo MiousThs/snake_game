@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "lite-server"
+    "start": "lite-server",
+    "compile": "tsc && sass ./src/style.scss ./build/style.css"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,9 @@
     "url": "https://github.com/MiousThs/snake_game/issues"
   },
   "homepage": "https://github.com/MiousThs/snake_game#readme",
-  "dependencies": {},
+  "dependencies": {
+    "sass": "^1.26.5"
+  },
   "devDependencies": {
     "lite-server": "^2.5.4",
     "typescript": "^3.8.3"
