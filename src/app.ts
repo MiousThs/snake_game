@@ -3,56 +3,26 @@
 // add bootstrap?
 // Score for the game
 
+import { IDirection, IPosition, IGrid, ISnakeBody } from "./models/intefaces";
+import { DEFAULT_SNAKE_SIZE, DEFAULT_GAME_SPEED } from "./models/constants";
 
 window.onload = () => {
-
-    const CELL_SIZE = 30;
-
-    interface IDirection {
-        xDirection: number;
-        yDirection: number;
-    };
-
-    interface IPosition {
-        x: number;
-        y: number;
-    };
-
-    interface ISnakeBody extends IPosition {
-        isHead: boolean;
-    }
-
-    interface IGrid {
-        horizontalSize: number;
-        verticalSize: number;
-    };
-
-    interface IFieldCell {
-        xCoordinate: number;
-        yCoordinate: number;
-        isApple: boolean;
-        isSnake: boolean;
-    };
  
     class SnakeGame {
-        private trigger: number = 8;
-        private direction: IDirection = {
-            xDirection: 0,
-            yDirection: 0
-        };
-        private snakeSize: number = 3;
-        private snakePosition: IPosition = {
-            x: 15,
-            y: 15
-        };
-        private grid: IGrid = {
-            horizontalSize: 30,
-            verticalSize: 30
-        };
-        // private apple: IPosition;
-        // private snakeTrail: ISnakeBody[];
-        // private canvas: HTMLCanvasElement;
-        // private ctx: CanvasRenderingContext2D;
+        private gameSpeed: number | undefined;
+        private direction: IDirection | undefined;
+        private snakeSize: number | undefined;
+        private snakePosition: IPosition | undefined;
+        private grid: IGrid | undefined;
+        private apple: IPosition | undefined;
+        private snakeTrail: ISnakeBody[] | undefined;
+        private canvas: HTMLCanvasElement | undefined;
+        private ctx: CanvasRenderingContext2D | undefined;
+        private gameInterval: number | undefined;
+
+        constructor() {
+            this._setupPlayingField();
+        }
         
 
         private handleKeyDown(direction: IDirection, e: KeyboardEvent): IDirection {
@@ -96,20 +66,34 @@ window.onload = () => {
             // })
         }
 
-        private _setupPlayingFiedl(): void {
-            /** Draw border and background */
+        private _setupPlayingField(): void {
+            // DOM setting
+            this.canvas = document.getElementById('canvas') as HTMLCanvasElement;
+            this.ctx = this.canvas.getContext('2d')!;
+            
+            // game settings
+            this.snakeSize = DEFAULT_SNAKE_SIZE;
+            this.gameSpeed = DEFAULT_GAME_SPEED;
+            this.direction = {
+                xDirection: 1,
+                yDirection: 0
+            };
+            this.snakePosition = {
+                x: 0,
+                y: 0
+            };
+            this.grid = {
+                horizontalSize: 30,
+                verticalSize: 30
+            };
+            let i = 0;
+            this.gameInterval = setInterval(() => {
+                console.log(i++);
+            }, 1000/this.gameSpeed!);
+            setTimeout(() => clearInterval(this.gameInterval), 20000);
         }
         
     };
-
-    class AppleService {
-        public handleCollect() {}
-        public swapThePhotos() {}
-    }
-
-    class DataStorageService {
-        public setRecord() {}
-    }
     
     const game = new SnakeGame();
 }

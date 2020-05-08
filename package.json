@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "lite-server",
-    "compile": "tsc && sass ./src/style.scss ./build/style.css"
+    "compile": "webpack && sass ./src/style.scss ./dist/style.css"
   },
   "repository": {
     "type": "git",
@@ -18,11 +18,13 @@
     "url": "https://github.com/MiousThs/snake_game/issues"
   },
   "homepage": "https://github.com/MiousThs/snake_game#readme",
-  "dependencies": {
-    "sass": "^1.26.5"
-  },
+  "dependencies": {},
   "devDependencies": {
     "lite-server": "^2.5.4",
-    "typescript": "^3.8.3"
+    "sass": "^1.26.5",
+    "ts-loader": "^7.0.3",
+    "typescript": "^3.8.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   }
 }
