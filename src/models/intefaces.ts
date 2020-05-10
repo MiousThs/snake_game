@@ -9,7 +9,7 @@ export interface IPosition {
 };
 
 export interface ISnakeBody extends IPosition {
-    isHead: boolean;
+    isHead?: boolean;
 }
 
 export interface IGrid {
@@ -23,3 +23,9 @@ export interface IFieldCell {
     isApple: boolean;
     isSnake: boolean;
 };
+
+export enum GameState {
+    terminated = 0,
+    paused = 1,
+    inProgress = 2
+}
