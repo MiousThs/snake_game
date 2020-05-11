@@ -29,3 +29,32 @@ export enum GameState {
     paused = 1,
     inProgress = 2
 }
+
+export enum GameCharacters {
+    dasha = 'dasha',
+    andrii = 'andrii',
+    aang = 'aang',
+    katara = 'katara'
+}
+
+export interface IDOMElementsList {
+    score?: HTMLElement;
+    modalText?: HTMLElement;
+    scoreList?: HTMLElement;
+}
+
+export interface IScore {
+    date: Date,
+    score: number
+}
+
+export enum MoveDirections {
+    right = 'right',
+    left = 'left',
+    up = 'up',
+    down = 'bot'
+}
+
+export interface IImageMap {
+    [key: string]: CanvasImageSource;
+}
