@@ -1,0 +1,44 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.game {
+    margin-top: 25px;
+}
+
+.page-container {
+    background-image: url("../pexels-photo-1169754.jpeg");
+    height: 100vh;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+
+    &__controls {
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+            margin-left: 4px;
+        }
+    }
+
+    &__score {
+        display: flex;
+        align-items: center;
+        margin-right: 22px;
+    }
+
+    .container-canvas {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 15px;
+    }
+}
