@@ -48,12 +48,16 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleSelect1">Choose speed:</label>
+                    <label for="exampleSelect1">Choose level of difficulty:</label>
                     <select class="form-control" id="gameDifficulty">
                         <option value="5">Easy</option>
                         <option value="8" selected>Medium</option>
                         <option value="11">Hard</option>
-                        <option value="15">Good luck!</option>
+                        <option value="15">Very hard</option>
+                        <option value="20">Impossible</option>
+                        <option value="27">Divine</option>
+                        <option value="33">Good luck!</option>
+                        <option value="55">Keep all deadlines</option>
                     </select>
                 </div>
 
@@ -63,6 +67,8 @@
                 <ul class="list-group text-light" id="scoreList">
                     <li class="list-group-item bg-dark" aria-disabled="true">Cras justo odio</li>
                 </ul>
+                <button class="btn btn-light btn-lg" id="fsBtn" style="margin-top: 15px;">Fullscreen</button>    
+
 
                 <div class="modal text-dark" tabindex="-1" role="dialog" id="scoreModal">
                     <div class="modal-dialog" role="document">

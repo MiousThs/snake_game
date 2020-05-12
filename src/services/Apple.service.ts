@@ -1,8 +1,6 @@
 import { IPosition } from "../models/intefaces";
 
 export class AppleService {
-    public handleCollect() {}
-    public swapThePhotos() {}
     public getApplePosition(snakePositions: IPosition[], gridSize: number): IPosition {
         const availablePozitions = this._getAvailablePositions(snakePositions, gridSize);
         return availablePozitions[Math.round(Math.random() * (availablePozitions.length - 1))];
