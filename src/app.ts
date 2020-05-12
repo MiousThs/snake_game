@@ -1,5 +1,6 @@
 // array of changes direction on every key press
 // get config from localstorage
+// reset scores and fullscreen buttons
 
 import { IDirection, IPosition, GameState, GameCharacters, IDOMElementsList, MoveDirections, IImageMap, IScore } from "./models/intefaces";
 import { DEFAULT_SNAKE_SIZE, DEFAULT_GAME_SPEED, CELL_SIZE, DEFAULT_GRID_LENGTH, DEFAULT_CANVAS_SIZE } from "./models/constants";
@@ -118,7 +119,11 @@ window.onload = () => {
 
         private handleGameLoose(): void {
             clearInterval(this.gameInterval);
-            this.storageService.setNewRecord({date: new Date(), score: this.gameScore});
+            this.storageService.setNewRecord({
+                date: new Date(),
+                score: this.gameScore,
+                difficulty: this._getGameDifficulty(this.gameSpeed)
+            });
             this._setScores(this.storageService.getScores());
             this._showMessage(this.gameScore);
             this.restartGame();
@@ -205,6 +210,19 @@ window.onload = () => {
             this.gameInterval = setInterval(()=> this.gameTick(), 1000/this.gameSpeed!);
         }
 
+        private enterFullScreenMode(): void {
+            const elem = document.documentElement as any;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+              } else if (elem.mozRequestFullScreen) { /* Firefox */
+                elem.mozRequestFullScreen();
+              } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                elem.webkitRequestFullscreen();
+              } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                elem.msRequestFullscreen();
+              }
+        }
+
 
 
         private _setScores(scores: IScore[]): void {
@@ -215,7 +233,7 @@ window.onload = () => {
             if (scores.length) {
                 scores.forEach((score: IScore, i: number) => {
                     const node = document.createElement('li');
-                    const innerTxt = `${i + 1}. ${new Date(score.date).toDateString()} - ${score.score} points`;
+                    const innerTxt = `${i + 1}. ${new Date(score.date).toDateString()} - ${score.score} points${score.difficulty? ' - ' + score.difficulty : ' - Unknown Difficulty'}`;
                     const txt = document.createTextNode(innerTxt);
                     node.appendChild(txt);
                     node.classList.add('list-group-item');
@@ -233,13 +251,21 @@ window.onload = () => {
         private _showMessage(score: number): void {
             let message = '';
             if (score < 11) {
-                message = `Well, ${score} points is not much, but it's Ok.`
+                message = `Well, ${score} points is not much, but it's Ok.`;
             } else if (score < 25) {
                 message = `Hey, bro. You got ${score} points. Nicely played!`;
-            } else if (score < 50) {
-                message = `Wow! ${score} points! You are  a pro!`
+            } else if (score < 40) {
+                message = `Wow! ${score} points! You are a pro!`
+            } else if (score < 45) {
+                message = `Do not believe. Send me link on cheats you've used.`;
+            } else if (score < 60) {
+                message = `C'mon, let your asian, who got for ${score} points, go home.`;
+            } else if (score < 75) {
+                message = `${score} points and the fastest fingers on the Wild West.`;
+            } else if (score < 100) {
+                message = `While you were achieving ${score} points, guys from South Korea were calling. They want you to train their Starcraft teams.`;
             } else {
-                message = `Do not believe. Send me link on cheats you've used.`
+                message = `"${score} points..." - the story tell your children...`
             }
             const txt = document.createTextNode(message);
             $('#scoreModal').modal('show');
@@ -299,6 +325,7 @@ window.onload = () => {
             document.getElementById('aang')?.addEventListener('click', () => this.handleChooseCharacter(GameCharacters.aang));
             document.getElementById('katara')?.addEventListener('click', () => this.handleChooseCharacter(GameCharacters.katara));
             document.getElementById('gameDifficulty')?.addEventListener('change', (e: any) => this.handleGameDifficulty(e.target?.value as number));
+            document.getElementById('fsBtn')?.addEventListener('click', ()=> this.enterFullScreenMode())
         }
 
         private _setupGameSettings(): void {
@@ -349,6 +376,20 @@ window.onload = () => {
 
         private _getNextCoordinate(current: number, direction: number, maxLength: number): number {
             return (current + direction + maxLength) % maxLength;
+        }
+
+        private _getGameDifficulty(frequency: number): string {
+            switch (Number(frequency)) {
+                case 5: return 'Easy';
+                case 8: return 'Medium';
+                case 11: return 'Hard';
+                case 15: return 'Very hard';
+                case 20: return 'Impossible';
+                case 27: return 'Divine';
+                case 33: return 'Good luck!';
+                case 55: return 'Keep all deadlines';
+                default: return 'Unknown difficulty';
+            }
         }
 
     };

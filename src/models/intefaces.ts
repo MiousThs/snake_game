@@ -46,6 +46,7 @@ export interface IDOMElementsList {
 export interface IScore {
     date: Date,
     score: number
+    difficulty?: string;
 }
 
 export enum MoveDirections {
